@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        vector<int>::iterator A = nums.begin();
+        vector<int>::iterator C = nums.end();
+        sort(A, C);
+        vector<int>::iterator B = nums.begin() + 1;
+        C--;
+        int sum = *A + *B + *C;
+        int result = sum;
+        int MinDiff = abs(sum - target);
+        int flag = 0;
+        for(; A <= C; A++)
+        {
+            B = A + 1;
+            C = nums.end() - 1;
+            while(B < C)
+            {
+            sum = *A + *B + *C;
+            int Diff = abs(sum - target);
+            if(Diff < MinDiff)
+            {
+                MinDiff = Diff;
+                result = sum;    
+            }
+            if(sum < target)
+            {
+                B++;
+            }
+            else if(sum > target)
+            {
+                C--;
+            }
+            else
+            {
+                flag = 1;
+                break;
+            }
+            }
+            if(flag == 1)
+            {
+                result = target;
+                break;
+            }
+            
+        }
+        return result;
+    }
+};
