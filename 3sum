@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+       vector<vector<int>> result;
+        if(nums.size() < 3)
+            return result;
+        vector<int>::iterator it1 = nums.begin();
+        vector<int>::iterator it3 = nums.end();
+        sort(it1, it3);
+        int target = 0;
+        vector<int>::iterator it2 = nums.begin() + 1;
+       
+        for(; it1 <= it3 - 2; it1++)
+        {
+            if(it1 != nums.begin())
+            {
+                if(*it1 == *(it1 - 1))
+                    continue;
+            }
+            it2 = it1 + 1;
+            it3 = nums.end() - 1;
+            while(it2 < it3)
+            {
+                
+            
+            if(*it1 + *it2 + *it3 > target)
+            {
+                --it3;
+                while(*it3 == *(it3 + 1)&&it2 < it3 )
+                    --it3;
+            }
+            else if(*it1 + *it2 + *it3 < target)
+            {
+                ++it2;
+                while(*it2 == *(it2 - 1)&&it2 < it3)
+                    ++it2;
+            }
+            else if(target == *it1 + *it2 + *it3)
+            {
+                result.push_back({*it1, *it2, *it3});
+                ++it2;
+                while(*it2 == *(it2 - 1)&&it2 < it3)
+                    ++it2;
+                continue;
+            }
+            }
+        }
+        return result;
+    }
+};
