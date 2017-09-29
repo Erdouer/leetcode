@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int end  = height.size() - 1;
+        int start = 0;
+        int maxv = 0;
+        int lastmaxv;
+        int minAi;
+        while(start < end)
+        {
+            lastmaxv = maxv;
+            minAi = min(height[start], height[end]);
+            maxv = minAi * (end - start);
+            if(maxv < lastmaxv)
+            {
+                maxv = lastmaxv;
+            }
+            if(height[start] > minAi)
+            {
+                end--;
+            }
+            else
+            {
+                start++;
+            }
+                
+        }
+        return maxv;
+    }
+};
