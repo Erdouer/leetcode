@@ -1,0 +1,54 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int start = 0;
+        int end = height.size() - 1;
+        vector<int> height_rain(height.size());
+      for(int i = 0; i < height.size(); i++)
+            height_rain[i] = height[i];
+        int cur_max;
+        auto max_it = max_element(height.begin(), height.end());
+        int max_loc = max_it - height.begin();
+        for(int i = 0; i < max_loc; i++)
+        {
+            if(i == 0)
+            {
+                height_rain[i] = height[i];
+                cur_max = height[i];
+            }
+            else
+            {
+                if(height[i] <= cur_max)
+                    height_rain[i] = cur_max;
+                else
+                {
+                    cur_max = height[i];
+                }
+            }
+        }
+        for(int i = height.size() - 1; i > max_loc; i--)
+        {
+            if(i == height.size() - 1)
+            {
+                height_rain[i] = height[i];
+                cur_max = height[i];
+            }
+            else
+            {
+                if(height[i] <= cur_max)
+                    height_rain[i] = cur_max;
+                else
+                {
+                    cur_max = height[i];
+                }
+            }
+        }
+        int sum = 0;
+        for(int i = 0; i < height.size(); i++)
+        {
+            sum += (height_rain[i] - height[i]);
+        }
+        
+        return sum;
+    }
+};
