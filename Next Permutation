@@ -1,0 +1,46 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        if(nums.size() == 1)
+        {
+            
+        }
+        else
+        {
+        
+        vector<int>::iterator it2 = nums.end();
+        it2--;
+        for(it2--; *it2 >= *max_element(it2 + 1,nums.end())&&it2 > nums.begin(); it2--);
+        if(it2 == nums.begin())
+        {
+            if(*it2 > *max_element(it2 + 1, nums.end()))
+               reverse(nums.begin(), nums.end());
+            else
+            {
+                for(vector<int>::iterator it1 = nums.end() - 1; it1 > it2 ; it1--)
+                {
+                    if(*it1 > *it2)
+                    {
+                        swap(*it1, *it2);
+                        //cout<<*it1;
+                        sort(it2 + 1, nums.end());
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+              for(vector<int>::iterator it1 = nums.end() - 1; it1 > it2 ; it1--)
+                {
+                    if(*it1 > *it2)
+                    {
+                        swap(*it1, *it2);
+                        sort(it2 + 1, nums.end());
+                        break;
+                    }
+                }
+        }
+        }
+    }
+};
