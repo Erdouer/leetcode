@@ -1,0 +1,21 @@
+class Solution {
+
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.empty())
+            return vector<string>();
+    string d[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        vector<string> result({""});
+        for(auto c : digits)
+        {
+            vector<string> temp;
+            for(int j = 0; j < result.size(); j++)
+                for(int i = 0; i < d[c - '0'].size(); i++)
+                    temp.push_back(result[j] + d[c - '0'][i]);
+            result = temp;
+        }
+        return result;
+    }
+
+    
+};
